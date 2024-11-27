@@ -1,0 +1,257 @@
+@font-face {
+  font-family: "zabars";
+  src: url("font/zabars.ttf");
+}
+
+* {
+  font-family: "zabars", Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  letter-spacing: 3px;
+  color: white;
+  font-size: 80px;
+  text-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  display: none;
+}
+
+h3 {
+    letter-spacing: 3px;
+    color: white;
+    font-size: 80px;
+    text-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+body {
+  margin: 0;
+  background-image: url("img/5_background/layers/air.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+canvas {
+  background-color: black;
+  display: block;
+  margin: 0 auto;
+}
+
+.menu {
+  z-index: 13;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 40px;
+}
+
+.menu a {
+  font-size: 28px;
+  color: white;
+  text-decoration: none;
+  padding-bottom: 12px;
+}
+
+.menu a:hover {
+  color: #a8f3f7;
+}
+
+#start-screen-overlay {
+    width: 100%;
+}
+
+#start-screen {
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+}
+
+.how-to-play {
+  z-index: 13;
+  position: absolute;
+}
+
+#game-over-screen {
+  z-index: 11;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+#end-screen-win {
+  z-index: 12;
+  position: absolute;
+  width: 100%;
+  height: 480px;
+}
+
+#end-screen-lose {
+  z-index: 12;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#game-win-screen {
+  width: 100%;
+}
+
+.on-screen-buttons {
+  z-index: 12;
+  position: absolute;
+  bottom: 200px;
+  left: 33%;
+}
+.overlay {
+  position: relative;
+  background-image: url("img/5_background/layers/air.png");
+}
+
+.buttons {
+  z-index: 12;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  left: 0;
+  bottom: 20px;
+}
+
+.buttons img {
+  height: 60px;
+}
+
+button {
+  all: unset;
+  color: white;
+  background-color: #652901;
+  width: 200px;
+  text-align: center;
+  align-items: center;
+  font-size: 26px;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+button:hover {
+  background-color: #4e2001;
+  color: white;
+}
+
+.buttons img {
+  display: none;
+  margin-left: 15px;
+  margin-right: 15px;
+  opacity: 0.5;
+}
+
+#volume-button {
+  cursor: pointer;
+}
+
+#fullscreen-button {
+  display: none;
+  cursor: pointer;
+}
+
+#info-button {
+    cursor: pointer;
+}
+
+.close-button {
+    position: absolute;
+    display: flex;
+    justify-content: end;
+    width: 100%;
+}
+
+.close-button img {
+    cursor: pointer;
+    height: 40px;
+    padding: 15px;
+}
+
+span {
+  text-align: center;
+  font-size: 36px;
+}
+
+#controls-container {
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  font-size: 24px;
+}
+
+.top-buttons-container {
+    z-index: 12;
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.d-none {
+  display: none !important;
+}
+@media only screen and (max-width: 720px) {
+  h1 {
+    display: none;
+  }
+  canvas {
+    width: 100vw;
+  }
+  .overlay {
+    display: none;
+  }
+
+  h2 {
+    display: block;
+  }
+}
+
+@media only screen and (max-height: 480px) {
+  h1 {
+    display: none;
+  }
+  canvas {
+    height: 100vh;
+  }
+  .overlay {
+    height: 100vh;
+  }
+}
+
+@media (max-width: 650px) {
+}
+
+@media only screen and (max-width: 1024px) {
+  .buttons img {
+    display: unset;
+  }
+
+  #fullscreen-button {
+    display: unset;
+  }
+
+  h1 {
+    display: none;
+  }
+}
