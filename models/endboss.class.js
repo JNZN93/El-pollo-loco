@@ -55,51 +55,62 @@ class Endboss extends MovableObject {
     this.animate();
     allSounds.push(this.dead_sound, this.hurtSound);
   }
-
-  animate() {
-    setInterval(() => {
-      if(this.x <= 0) {
-        this.otherDirection = true;
-      } else if(this.x >= 2800) {
-        this.otherDirection = false;
-      }
-      if (this.isHurt()) {
-        this.playAnimation(this.IMAGES_HURT);
-        this.otherDirection = false;
-        this.hurtSound.play();
-        this.walksLeft = true;
-      } else if (this.isDead()) {
-        this.isKilled = true;
-        this.playAnimation(this.IMAGES_DEAD);
-      } else {
-        if (!this.walksLeft) {
-          this.playAnimation(this.IMAGES_ALERT);
-        } else {
-          if (!this.otherDirection) {
-            this.playAnimation(this.IMAGES_WALKING);
-            this.moveLeft();
-          } else {
-            this.playAnimation(this.IMAGES_WALKING);
-            this.moveRight();
-          }
-
-        }
-      }
-    }, 200);
-  }
-
-  enemyKilled() {
-    setInterval(() => {
+/**
+ * Animates the Endboss object by updating its position and animation state.
+ */
+animate() {
+  setInterval(() => {
+    if(this.x <= 0) {
+      this.otherDirection = true;
+    } else if(this.x >= 2800) {
+      this.otherDirection = false;
+    }
+    if (this.isHurt()) {
+      this.playAnimation(this.IMAGES_HURT);
+      this.otherDirection = false;
+      this.hurtSound.play();
+      this.walksLeft = true;
+    } else if (this.isDead()) {
+      this.isKilled = true;
       this.playAnimation(this.IMAGES_DEAD);
-    }, 200);
-    this.dead_sound.play();
-  }
+    } else {
+      if (!this.walksLeft) {
+        this.playAnimation(this.IMAGES_ALERT);
+      } else {
+        if (!this.otherDirection) {
+          this.playAnimation(this.IMAGES_WALKING);
+          this.moveLeft();
+        } else {
+          this.playAnimation(this.IMAGES_WALKING);
+          this.moveRight();
+        }
 
-  moveLeft() {
-    this.x -= this.speed * 350;
-  }
+      }
+    }
+  }, 200);
+}
 
-  moveRight() {
-      this.x += this.speed * 350;
-  }
+/**
+ * Plays the death animation and sound for the Endboss object.
+ */
+enemyKilled() {
+  setInterval(() => {
+    this.playAnimation(this.IMAGES_DEAD);
+  }, 200);
+  this.dead_sound.play();
+}
+
+/**
+ * Moves the Endboss object to the left by subtracting its speed from its x position.
+ */
+moveLeft() {
+  this.x -= this.speed * 350;
+}
+
+/**
+ * Moves the Endboss object to the right by adding its speed to its x position.
+ */
+moveRight() {
+  this.x += this.speed * 350;
+}
 }

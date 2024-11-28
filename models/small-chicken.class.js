@@ -38,42 +38,56 @@ class SmallChicken extends MovableObject {
     allSounds.push(this.walking_sound, this.dead_sound);
   }
 
-  animate() {
-    if (!this.isDead()) {
-        this.randomJump();
-      this.moveLeftInterval = setInterval(() => {
-        this.moveLeft();
-      }, 1000 / 60);
-      this.walkingInterval = setInterval(() => {
-        this.playAnimation(this.IMAGES_WALKING);
-      }, 200);
-    }
+/**
+ * Animates the chicken's movement and jumping.
+ */
+animate() {
+  if (!this.isDead()) {
+    this.randomJump();
+    this.moveLeftInterval = setInterval(() => {
+      this.moveLeft();
+    }, 1000 / 60);
+    this.walkingInterval = setInterval(() => {
+      this.playAnimation(this.IMAGES_WALKING);
+    }, 200);
   }
+}
 
-  isAboveGround() {
-    if (this instanceof ThrowableObject) {
-      return true;
-    } else {
-      return this.y < 370;
-    }
+/**
+ * Checks if the chicken is above the ground.
+ * 
+ * @returns {boolean} True if the chicken is above the ground, false otherwise.
+ */
+isAboveGround() {
+  if (this instanceof ThrowableObject) {
+    return true;
+  } else {
+    return this.y < 370;
   }
+}
 
-  enemyKilled() {
-    this.isKilled = true;
-    clearInterval(this.moveLeftInterval);
-    clearInterval(this.walkingInterval);
-    clearInterval(this.deadInterval);
-    this.deadInterval = setInterval(() => {
-      this.playAnimation(this.IMAGES_DEAD);
-    }, 100);
+/**
+ * Handles the chicken's death animation and sound.
+ */
+enemyKilled() {
+  this.isKilled = true;
+  clearInterval(this.moveLeftInterval);
+  clearInterval(this.walkingInterval);
+  clearInterval(this.deadInterval);
+  this.deadInterval = setInterval(() => {
+    this.playAnimation(this.IMAGES_DEAD);
+  }, 100);
 
-    this.dead_sound.play();
-  }
+  this.dead_sound.play();
+}
 
-  randomJump() {
-    let jumpInterval = Math.random() * 4000;
-    this.deadInterval = setInterval(() => {
-        super.jump();
-    },jumpInterval)
-  }
+/**
+ * Makes the chicken jump at a random interval.
+ */
+randomJump() {
+  let jumpInterval = Math.random() * 4000;
+  this.deadInterval = setInterval(() => {
+    super.jump();
+  }, jumpInterval)
+}
 }

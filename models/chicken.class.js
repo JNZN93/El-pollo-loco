@@ -28,26 +28,32 @@ class Chicken extends MovableObject {
     allSounds.push(this.walking_sound, this.dead_sound);
   }
 
-  animate() {
-    if (!this.isDead()) {
-      this.moveLeftInterval = setInterval(() => {
-        this.moveLeft();
-      }, 1000 / 60);
+/**
+ * Animates the chicken's movement and walking animation.
+ */
+animate() {
+  if (!this.isDead()) {
+    this.moveLeftInterval = setInterval(() => {
+      this.moveLeft();
+    }, 1000 / 60);
 
-      this.walkingInterval = setInterval(() => {
-        this.playAnimation(this.IMAGES_WALKING);
-      }, 200);
-    }
+    this.walkingInterval = setInterval(() => {
+      this.playAnimation(this.IMAGES_WALKING);
+    }, 200);
   }
+}
 
-  enemyKilled() {
-    this.isKilled = true;
-    clearInterval(this.moveLeftInterval);
-    clearInterval(this.walkingInterval);
-    this.deadInterval = setInterval(() => {
-      this.playAnimation(this.IMAGES_DEAD);
-    }, 100);
+/**
+ * Handles the chicken's death animation and sound.
+ */
+enemyKilled() {
+  this.isKilled = true;
+  clearInterval(this.moveLeftInterval);
+  clearInterval(this.walkingInterval);
+  this.deadInterval = setInterval(() => {
+    this.playAnimation(this.IMAGES_DEAD);
+  }, 100);
 
-    this.dead_sound.play();
-  }
+  this.dead_sound.play();
+}
 }

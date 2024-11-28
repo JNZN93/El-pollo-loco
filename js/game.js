@@ -4,6 +4,9 @@ let keyboard = new Keyboard();
 let allSounds = [];
 let allSoundsMuted = localStorage.getItem("allSoundsMuted");
 
+/**
+ * Initializes the game world and sets up the canvas and keyboard.
+ */
 function init() {
   deleteWorldInstance();
   allSounds = [];
@@ -18,12 +21,18 @@ function init() {
   initializeVolume();
 }
 
+/**
+ * Clears all intervals that are currently set.
+ */
 function clearAllIntervals() {
   for (let i = 1; i < 99999; i++) {
     window.clearInterval(i);
   }
 }
 
+/**
+ * Deletes the current world instance and clears intervals.
+ */
 function deleteWorldInstance() {
   if (world) {
     clearAllIntervals();
@@ -31,6 +40,7 @@ function deleteWorldInstance() {
   }
 }
 
+// Event listeners for keyboard input
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 38) {
     keyboard.UP = true;
@@ -63,6 +73,9 @@ window.addEventListener("keyup", (e) => {
   }
 });
 
+/**
+ * Sets up touch events for the buttons.
+ */
 function buttonTouchEvents() {
   document.getElementById("btn-right").addEventListener("touchstart", (e) => {
     e.preventDefault();
@@ -105,11 +118,18 @@ function buttonTouchEvents() {
   });
 }
 
+/**
+ * Enters fullscreen mode for the overlay element.
+ */
 function fullscreen() {
   let overlay = document.getElementById("overlay");
   enterFullscreen(overlay);
 }
 
+/**
+ * Requests fullscreen for the specified element.
+ * @param {HTMLElement} element - The element to make fullscreen.
+ */
 function enterFullscreen(element) {
   if (element.requestFullscreen) {
     element.requestFullscreen();
@@ -122,21 +142,33 @@ function enterFullscreen(element) {
   }
 }
 
+/**
+ * Hides the start screen overlay.
+ */
 function hideStartScreen() {
   let startScreen = document.getElementById("start-screen-overlay");
   startScreen.classList.add("d-none");
 }
 
+/**
+ * Hides the losing screen overlay.
+ */
 function hideLosingScreen() {
   let losingScreen = document.getElementById("end-screen-lose");
   losingScreen.classList.add("d-none");
 }
 
+/**
+ * Hides the winning screen overlay.
+ */
 function hideWiningScreen() {
   let winningScreen = document.getElementById("end-screen-win");
   winningScreen.classList.add("d-none");
 }
 
+/**
+ * Toggles the volume of all sounds.
+ */
 function toggleVolume() {
   let volumeButton = document.getElementById("volume-button");
   if(allSoundsMuted == null) {
@@ -155,6 +187,9 @@ function toggleVolume() {
   localStorage.setItem("allSoundsMuted", allSoundsMuted);
 }
 
+/**
+ * Initializes the volume settings based on the stored state.
+ */
 function initializeVolume() {
   let volumeButton = document.getElementById("volume-button");
   if(allSoundsMuted == null) {
@@ -167,7 +202,7 @@ function initializeVolume() {
     allSoundsMuted = true;
   }
   
-console.log('init ' + allSoundsMuted);
+  console.log('init ' + allSoundsMuted);
 
   volumeButton.src = allSoundsMuted ? "img/10_buttons/unmute.png" : "img/10_buttons/mute.png";
 
@@ -177,6 +212,9 @@ console.log('init ' + allSoundsMuted);
   localStorage.setItem("allSoundsMuted", allSoundsMuted);
 }
 
+/**
+ * Toggles the visibility of the controls container.
+ */
 function howToPlay() {
     let controlsCon = document.getElementById('controls-container')
     controlsCon.classList.toggle('d-none');

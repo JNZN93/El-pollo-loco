@@ -18,7 +18,10 @@ class Coin extends CollectableObject {
     allSounds.push(this.collectedSound);
   }
 
-  playSound() {
-    this.collectedSound.play();
-  }
+/**
+ * Plays the sound effect when the coin is collected.
+ */
+playSound() {
+  this.collectedSound.play();
+}
 }
