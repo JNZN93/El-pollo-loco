@@ -27,12 +27,13 @@ h3 {
 
 body {
   margin: 0;
-  background-image: url("img/5_background/layers/air.png");
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .main-container {
+  background-image: url("img/5_background/layers/air.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -110,10 +111,13 @@ canvas {
 }
 
 .on-screen-buttons {
+  display: flex;
   z-index: 12;
   position: absolute;
   bottom: 200px;
   left: 33%;
+  flex-direction: column;
+  gap: 12px;
 }
 .overlay {
   position: relative;
@@ -168,7 +172,8 @@ button:hover {
   cursor: pointer;
 }
 
-#info-button, #refresh-button {
+#info-button,
+#refresh-button {
   cursor: pointer;
 }
 
@@ -187,7 +192,7 @@ button:hover {
 .close-button img {
   cursor: pointer;
   height: 40px;
-  padding: 15px;
+  padding: 5px;
 }
 
 span {
@@ -199,7 +204,9 @@ span {
   display: flex;
   justify-content: space-around;
   height: 100%;
+  width: 100%;
   font-size: 24px;
+  background: bisque;
 }
 
 .top-buttons-container {
@@ -217,13 +224,17 @@ span {
   display: none !important;
 }
 
-.mt {
+.mtb {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 @media only screen and (max-width: 720px) {
   h1 {
     display: none;
+  }
+  .main-container {
+    height: unset;
   }
   canvas {
     width: 100vw;
@@ -247,7 +258,7 @@ span {
     display: none;
   }
   .main-container {
-    height: 100vh;
+    height: unset;
   }
 
   h2 {
