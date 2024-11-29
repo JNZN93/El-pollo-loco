@@ -23,22 +23,22 @@ class ThrowableObject extends MovableObject {
     this.throw(otherDirection);
   }
 
-/**
- * Throws the object in a specified direction.
- * 
- * @param {boolean} otherDirection - The direction of the throw. If true, the object is thrown to the left; otherwise, it is thrown to the right.
- */
-throw(otherDirection) {
-  this.speedY = 30;
-  this.applyGravity();
+  /**
+   * Throws the object in a specified direction.
+   *
+   * @param {boolean} otherDirection - The direction of the throw. If true, the object is thrown to the left; otherwise, it is thrown to the right.
+   */
+  throw(otherDirection) {
+    this.speedY = 30;
+    this.applyGravity();
 
-  setInterval(() => {
-    this.playAnimation(this.IMAGES_THROWBOTTLE);
-    if (otherDirection) {
-      this.x -= 20;
-    } else {
-      this.x += 20;
-    }
-  }, 50);
-}
+    setInterval(() => {
+      this.playAnimation(this.IMAGES_THROWBOTTLE);
+      if (otherDirection) {
+        this.x -= 20;
+      } else {
+        this.x += 20;
+      }
+    }, 50);
+  }
 }

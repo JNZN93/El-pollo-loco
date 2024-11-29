@@ -12,8 +12,8 @@ class Character extends MovableObject {
 
   offset = {
     top: 80,
-    left: 20,
-    right: 40,
+    left: 30,
+    right: 50,
     bottom: 90,
   };
 
@@ -98,145 +98,142 @@ class Character extends MovableObject {
     allSounds.push(this.walking_sound, this.jumping_sound, this.hurting_sound);
   }
 
-/**
- * Animates the character by moving and playing its animations.
- */
-animate() {
-  this.moveCharacter();
-  this.playCharacter();
-}
+  /**
+   * Animates the character by moving and playing its animations.
+   */
+  animate() {
+    this.moveCharacter();
+    this.playCharacter();
+  }
 
-/**
- * Moves the character based on user input and game state.
- */
-moveCharacter() {
-  setInterval(() => {
-    this.walking_sound.pause();
-    this.walking_sound.playbackRate = 2.1;
-    if (this.canMoveRight()) this.moveRight();
+  /**
+   * Moves the character based on user input and game state.
+   */
+  moveCharacter() {
+    setInterval(() => {
+      this.walking_sound.pause();
+      this.walking_sound.playbackRate = 2.1;
+      if (this.canMoveRight()) this.moveRight();
 
-    if (this.canMoveLeft()) this.moveLeft();
+      if (this.canMoveLeft()) this.moveLeft();
 
-    if (this.canJump()) this.jump();
+      if (this.canJump()) this.jump();
 
-    if (this.x >= 2200) this.showEndbossBar = true;
+      if (this.x >= 2200) this.showEndbossBar = true;
 
-    this.world.camera_x = -this.x + 100;
-  }, 1000 / 40);
-}
+      this.world.camera_x = -this.x + 100;
+    }, 1000 / 40);
+  }
 
-/**
- * Plays the character's animations based on its state.
- */
-playCharacter() {
-  setInterval(() => {
-    if (this.y < 40) {
-      this.canAttack = true;
-    } else if (this.y == 230) {
-      this.canAttack = false;
-    }
-    if (this.isDead()) {
-      this.playAnimation(this.IMAGES_DEAD);
-    } else if (this.isHurt()) {
-      this.playHurt();
-    } else if (this.isAboveGround()) {
-      this.playAnimation(this.IMAGES_JUMPING);
-    } else {
-      if (this.longIdle()) {
-        this.playAnimation(this.IMAGES_LONGIDLE);
+  /**
+   * Plays the character's animations based on its state.
+   */
+  playCharacter() {
+    setInterval(() => {
+      if (this.y < 40) {
+        this.canAttack = true;
+      } else if (this.y == 230) {
+        this.canAttack = false;
+      }
+      if (this.isDead()) {
+        this.playAnimation(this.IMAGES_DEAD);
+      } else if (this.isHurt()) {
+        this.playHurt();
+      } else if (this.isAboveGround()) {
+        this.playAnimation(this.IMAGES_JUMPING);
       } else {
-        this.playAnimation(this.IMAGES_IDLE);
+        if (this.longIdle()) {
+          this.playAnimation(this.IMAGES_LONGIDLE);
+        } else {
+          this.playAnimation(this.IMAGES_IDLE);
+        }
+        this.attackable = true;
+        if (this.pressAnyKey()) {
+          this.playAnimation(this.IMAGES_WALKING);
+          this.timeStamp = new Date();
+        }
       }
-      this.attackable = true;
-      if (this.pressAnyKey()) {
-        this.playAnimation(this.IMAGES_WALKING);
-        this.timeStamp = new Date();
-      }
-    }
-  }, 100);
-}
+    }, 100);
+  }
 
-/**
- * Checks if the character can move to the right.
- * @returns {boolean} True if the character can move to the right, false otherwise.
- */
-canMoveRight() {
-  return (
-    this.world.keyboard.RIGHT &&
-    this.x < this.world.level.level_end_x &&
-    this.speed > 0
-  );
-}
+  /**
+   * Checks if the character can move to the right.
+   * @returns {boolean} True if the character can move to the right, false otherwise.
+   */
+  canMoveRight() {
+    return (
+      this.world.keyboard.RIGHT &&
+      this.x < this.world.level.level_end_x &&
+      this.speed > 0
+    );
+  }
 
-/**
- * Moves the character to the right.
- */
-moveRight() {
-  this.otherDirection = false;
-  super.moveRight();
-  this.walking_sound.play();
-}
+  /**
+   * Moves the character to the right.
+   */
+  moveRight() {
+    this.otherDirection = false;
+    super.moveRight();
+    this.walking_sound.play();
+  }
 
-/**
- * Checks if the character can move to the left.
- * @returns {boolean} True if the character can move to the left, false otherwise.
- */
-canMoveLeft() {
-  return this.world.keyboard.LEFT && this.x > 0 && this.speed > 0;
-}
+  /**
+   * Checks if the character can move to the left.
+   * @returns {boolean} True if the character can move to the left, false otherwise.
+   */
+  canMoveLeft() {
+    return this.world.keyboard.LEFT && this.x > 0 && this.speed > 0;
+  }
 
-/**
- * Moves the character to the left.
- */
-moveLeft() {
-  this.otherDirection = true;
-  super.moveLeft();
-  this.walking_sound.play();
-}
+  /**
+   * Moves the character to the left.
+   */
+  moveLeft() {
+    this.otherDirection = true;
+    super.moveLeft();
+    this.walking_sound.play();
+  }
 
-/**
- * Checks if the character can jump.
- * @returns {boolean} True if the character can jump, false otherwise.
- */
-canJump() {
-  return this.world.keyboard.UP && !this.isAboveGround() && this.speed > 0;
-}
+  /**
+   * Checks if the character can jump.
+   * @returns {boolean} True if the character can jump, false otherwise.
+   */
+  canJump() {
+    return this.world.keyboard.UP && !this.isAboveGround() && this.speed > 0;
+  }
 
-/**
- * Makes the character jump.
- */
-jump() {
-  this.timeStamp = new Date();
-  this.jumping_sound.playbackRate = 2;
-  this.jumping_sound.play();
-  super.jump();
-}
+  /**
+   * Makes the character jump.
+   */
+  jump() {
+    this.timeStamp = new Date();
+    this.jumping_sound.playbackRate = 2;
+    this.jumping_sound.play();
+    super.jump();
+  }
 
-/**
- * Checks if the character has been idle for a long time.
- * @returns {boolean} True if the character has been idle for a long time, false otherwise.
- */
-longIdle() {
-  return new Date() - this.timeStamp > 10000;
-}
+  /**
+   * Checks if the character has been idle for a long time.
+   * @returns {boolean} True if the character has been idle for a long time, false otherwise.
+   */
+  longIdle() {
+    return new Date() - this.timeStamp > 10000;
+  }
 
-/**
- * Checks if any key is being pressed.
- * @returns {boolean} True if any key is being pressed, false otherwise.
- */
-pressAnyKey() {
-  return (
-    this.world.keyboard.RIGHT ||
-    this.world.keyboard.LEFT
-  );
-}
+  /**
+   * Checks if any key is being pressed.
+   * @returns {boolean} True if any key is being pressed, false otherwise.
+   */
+  pressAnyKey() {
+    return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
+  }
 
-/**
- * Plays the character's hurt animation and sound.
- */
-playHurt() {
-  this.attackable = false;
-  this.playAnimation(this.IMAGES_HURT);
-  this.hurting_sound.play();
-}
+  /**
+   * Plays the character's hurt animation and sound.
+   */
+  playHurt() {
+    this.attackable = false;
+    this.playAnimation(this.IMAGES_HURT);
+    this.hurting_sound.play();
+  }
 }

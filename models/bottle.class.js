@@ -17,10 +17,10 @@ class Bottle extends CollectableObject {
     allSounds.push(this.collectedSound);
   }
 
-/**
- * Plays the sound effect when the bottle is collected.
- */
-playSound() {
-  this.collectedSound.play();
-}
+  /**
+   * Plays the sound effect when the bottle is collected.
+   */
+  playSound() {
+    this.collectedSound.play();
+  }
 }

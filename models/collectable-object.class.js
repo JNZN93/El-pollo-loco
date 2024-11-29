@@ -17,10 +17,10 @@ class CollectableObject extends DrawableObject {
     allSounds.push(this.collectedSound);
   }
 
-/**
- * Plays the sound effect when the collectable object is collected.
- */
-playSound() {
-  this.collectedSound.play();
-}
+  /**
+   * Plays the sound effect when the collectable object is collected.
+   */
+  playSound() {
+    this.collectedSound.play();
+  }
 }

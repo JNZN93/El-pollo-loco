@@ -171,12 +171,11 @@ function hideWiningScreen() {
  */
 function toggleVolume() {
   let volumeButton = document.getElementById("volume-button");
-  if(allSoundsMuted == null) {
+  if (allSoundsMuted == null) {
     allSoundsMuted = false;
   }
 
   allSoundsMuted = !allSoundsMuted;
-  console.log("toggle " + allSoundsMuted);
 
   volumeButton.src = allSoundsMuted
     ? "img/10_buttons/unmute.png"
@@ -192,19 +191,19 @@ function toggleVolume() {
  */
 function initializeVolume() {
   let volumeButton = document.getElementById("volume-button");
-  if(allSoundsMuted == null) {
+  if (allSoundsMuted == null) {
     allSoundsMuted = false;
   }
-  if(allSoundsMuted == 'false') {
+  if (allSoundsMuted == "false") {
     allSoundsMuted = false;
   }
-  if(allSoundsMuted == 'true') {
+  if (allSoundsMuted == "true") {
     allSoundsMuted = true;
   }
-  
-  console.log('init ' + allSoundsMuted);
 
-  volumeButton.src = allSoundsMuted ? "img/10_buttons/unmute.png" : "img/10_buttons/mute.png";
+  volumeButton.src = allSoundsMuted
+    ? "img/10_buttons/unmute.png"
+    : "img/10_buttons/mute.png";
 
   allSounds.forEach((sound) => {
     sound.muted = allSoundsMuted;
@@ -216,6 +215,11 @@ function initializeVolume() {
  * Toggles the visibility of the controls container.
  */
 function howToPlay() {
-    let controlsCon = document.getElementById('controls-container')
-    controlsCon.classList.toggle('d-none');
+  let controlsCon = document.getElementById("controls-container");
+  controlsCon.classList.toggle("d-none");
+}
+
+
+function refreshGame() {
+location.reload();
 }
